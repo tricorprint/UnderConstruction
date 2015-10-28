@@ -1,5 +1,5 @@
-four51.app.controller('LoginCtrl', ['$scope', '$sce', '$route', '$location', 'User',
-function ($scope, $sce, $route, $location, User) {
+four51.app.controller('LoginCtrl', ['$scope', '$sce', '$route', '$location', '$window', 'User', 'Resources',
+function ($scope, $sce, $route, $location, $window, User, Resources) {
 	$scope.PasswordReset = $location.search().token != null;
 	var codes = ['PasswordSecurityException'];
 
@@ -63,4 +63,16 @@ function ($scope, $sce, $route, $location, User) {
 			}
 		);
 	}
+	$scope.loginGroups = Resources.loginGroups;
+    $scope.profileInfo = {};
+    $scope.register = function(profileInfo) {
+        var redirectUrl = profileInfo.GroupChoice.UrlTemplate
+                .replace('<user name>', profileInfo.Username)
+                .replace('<password>', profileInfo.Password)
+                .replace('<first name>', profileInfo.FirstName)
+                .replace('<last name>', profileInfo.LastName)
+                .replace('<email>', profileInfo.Email)
+        ;
+        $window.location.href = redirectUrl;
+    }
 }]);

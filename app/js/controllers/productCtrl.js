@@ -32,6 +32,12 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 		ProductDisplayService.getProductAndVariant($routeParams.productInteropID, $routeParams.variantInteropID, function (data) {
 			$scope.LineItem.Product = data.product;
 			$scope.LineItem.Variant = data.variant;
+			if(data.product.Type == "VariableText"){
+				$scope.showVariantSelector = true;
+				if($routeParams.variantInteropID){
+					$scope.showVariantSelector = false;
+				}
+			}
 			ProductDisplayService.setNewLineItemScope($scope);
 			ProductDisplayService.setProductViewScope($scope);
 			setDefaultQty($scope.LineItem);
@@ -53,7 +59,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			init(searchTerm) :
 			$scope.settings.currentPage = 1;
 	};
-
+	
 	$scope.deleteVariant = function(v, redirect) {
 		if (!v.IsMpowerVariant) return;
 		// doing this because at times the variant is a large amount of data and not necessary to send all that.
@@ -127,4 +133,13 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 		$scope.loadingImage = false;
 		$scope.$apply();
 	});
+	
+	$scope.variantSelected = function(v){
+		if(v){
+			ProductDisplayService.getProductAndVariant($routeParams.productInteropID, v.InteropID, function (data) {
+				$scope.LineItem.Variant = data.variant;
+			}, $scope.settings.currentPage, $scope.settings.pageSize, $scope.searchTerm);
+		}
+	};	
+	
 }]);

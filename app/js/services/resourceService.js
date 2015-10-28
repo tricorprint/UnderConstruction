@@ -336,7 +336,23 @@ four51.app.factory('Resources', function() {
         { "label": "Yukon", "value": "YT", "country": "CA" }
     ];
 
+    var loginGroups = [
+        {
+            GroupName:'Testblue',
+            UrlTemplate:'https://www.four51.com/UI/Profile.hcf?id=f3450b6d-3cf6-4489-9ae9-6fbe6cdc93a9&username=<user name>&password=<password>&name1=<first name>&name2=<last name>&email=<email>'
+        },
+        {
+            GroupName:'Testgreen',
+            UrlTemplate:'https://www.four51.com/UI/Profile.hcf?id=fd24a142-563e-45aa-a7fa-7b694f83a00f&username=<user name>&password=<password>&name1=<first name>&name2=<last name>&email=<email>'
+        },
+        {
+	        GroupName:'LowerTier',
+            UrlTemplate:'https://www.four51.com/UI/Profile.hcf?id=6da9e412-2da9-4ddd-946c-7d9f4379fac2&username=<user name>&password=<password>&name1=<first name>&name2=<last name>&email=<email>'
+        }
+    ];
+
     return {
+        loginGroups: loginGroups,
         countries:  countries,
         states: states
     };

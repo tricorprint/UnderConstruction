@@ -47,7 +47,22 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
 			});
 			Category.tree(function (data) {
 				$scope.tree = data;
-				$scope.$broadcast("treeComplete", data);
+				angular.forEach($scope.tree, function(t){
+					if(t.SubCategories){
+						t.ShowCat = [];
+						angular.forEach(t.SubCategories,function(sc){
+							t.ShowCat.push(sc.InteropID);
+							if(sc.SubCategories){
+								sc.ShowCat = [];
+								angular.forEach(sc.SubCategories,function(sc2){
+									t.ShowCat.push(sc2.InteropID);
+									sc.ShowCat.push(sc2.InteropID);
+								});
+							}
+						});
+					}
+				});
+				$scope.$broadcast("treeComplete", $scope.tree);
 			});
 		}
 	}
@@ -70,4 +85,7 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
 	});
 	$scope.$on("$routeChangeSuccess", init);
     $scope.$on('event:auth-loginRequired', cleanup);
+    
+
+
 }]);

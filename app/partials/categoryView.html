@@ -1,13 +1,20 @@
 <section>
     <nav id="451qa_nav_hdr" class="nav">
         <ul>
-            <li class="hidden-sm hidden-xs">
-                <span ng-click="toggleNav()"><i class="fa fa-bars" ng-class="{ 'text-info': navStatus.visible }"></i></span>
-            </li>
-            <li>
-                <span id="451_lbl_curcat" class="text-primary" ng-bind-html="currentCategory.Name || '  {{'Categories' | r | xlat}}'"></span>
+            <li style="cursor:pointer;">
+                <div class="category-toggle" ng-click="toggleNav()"> 
+                    <i class="fa fa-bars">
+                    </i> 
+                    <span id="451_lbl_curcat" class="category-toggle" ng-bind-html="currentCategory.Name || '  {{'Categories' | r | xlat}}'">
+                    </span>
+                </div>
             </li>
             <li class="pull-right">
+                <div style="display: inline;" ng-show="currentCategory.SortOptions.length > 0">                
+                    <label style="display: inline;">{{'Sort by: ' | r | xlat}}</label>
+                        <select class="alt-form-control" ng-options="option.SortValue as (option.Display | xlat) for option in currentCategory.SortOptions" ng-model="sort"><option value=""></option></select>
+                    <!--<i class="fa fa-sort"/>-->
+                </div>
                 <a href="search">
                     <span><i class="fa fa-search text-primary"></i></span>
                 </a>
@@ -15,7 +22,7 @@
         </ul>
     </nav>
     <div class="row">
-        <aside class="col-md-3 visible-md visible-lg" ng-if="navStatus.visible">
+        <aside class="col-md-3" ng-if="navStatus.visible">
             <div class="panel panel-default panel-nav">
                 <div class="panel-heading">
                     <h3 class="panel-title">
@@ -24,11 +31,25 @@
                 </div>
                 <nav class="nav 451qa_sidenav panel-body">
                     <ul>
-                        <categorytree tree='tree' current='currentCategory' />
+                        <li class="451_cat_item" ng-repeat="node in tree" ng-class="{'active': isInPath(node.Name)}">
+                            <a ng-href="catalog/{{node.InteropID}}" ng-bind-html="node.Name"></a>
+                            <ul ng-if="node.SubCategories" ng-show="isInPath(node.InteropID) || subInPath(node.ShowCat)">
+                                <li class="451_cat_item" ng-repeat="subCat in node.SubCategories">
+                                    <a ng-class="{'active': subInPath(node.ShowCat)}" ng-href="catalog/{{subCat.InteropID}}" ng-bind-html="subCat.Name"></a>
+                                    <ul ng-if="subCat.SubCategories" ng-show="isInPath(subCat.InteropID) || subInPath(subCat.ShowCat)">
+                                        <li class="451_cat_item" ng-repeat="subCatTwo in subCat.SubCategories">
+                                            <a ng-class="{'active': subInPath(node.ShowCat)}" ng-href="catalog/{{subCatTwo.InteropID}}" ng-bind-html="subCatTwo.Name"></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
             </div>
-        </aside>
+            
+
+</aside>
         <div ng-class="{ 'col-md-9': navStatus.visible, 'col-md-12': !navStatus.visible }" >
 
             <categorylistview></categorylistview>
@@ -40,3 +61,4 @@
         </div>
     </div>
 </section>
+

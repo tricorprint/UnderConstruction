@@ -1,4 +1,29 @@
+<div id="buckets" class="animated fadeIn" style="display:none;">
+    
+    <div class="col-sm-12" id="green" ng-show="user.Groups[0].Name == 'Testgreen'">
+        <div class="col-xs-12 col col-sm-6 col-md-3" style="background-color: green; margin: 5px; height: 150px;">
+        </div>
+        <div class="col-xs-12 col col-sm-6 col-md-3" style="background-color: green; margin: 5px; height: 150px;">
+        </div>
+        <div class="col-xs-12 col col-sm-6 col-md-3" style="background-color: green; margin: 5px; height: 150px;">
+        </div>
+    </div>
+    <div class="col-sm-12" id="blue" ng-show="user.Groups[0].Name == 'Testblue'">
+        <div class="col-xs-12 col col-sm-6 col-md-3" style="background-color: blue; margin: 5px; height: 150px;">
+        </div>
+        <div class="col-xs-12 col col-sm-6 col-md-3" style="background-color: blue; margin: 5px; height: 150px;">
+        </div>
+        <div class="col-xs-12 col col-sm-6 col-md-3" style="background-color: blue; margin: 5px; height: 150px;">
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--
 <div class="panel panel-default" ng-show="currentCategory.SubCategories.length">
+
     <div class="panel-heading" >
         <h3 class="panel-title" >
             {{'Categories' | r | xlat}}
@@ -8,7 +33,9 @@
         <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
                     items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
     </div>
-    <div class="panel-category-list">
+
+
+        <div class="panel-category-list">
         <loadingindicator ng-show="categoryLoadingIndicator" title="{{'Please wait while we fetch all categories' | r | xlat}}" />
         <nav class="nav 451_lbl_subcatlist">
             <ul>
@@ -28,8 +55,16 @@
             </ul>
         </nav>
     </div>
+    
+
+
+
     <div class="well" ng-show="productCount > settings.pageSize">
         <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
                     items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
     </div>
+
 </div>
+-->
+
+

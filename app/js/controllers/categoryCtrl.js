@@ -1,5 +1,5 @@
-four51.app.controller('CategoryCtrl', ['$routeParams', '$sce', '$scope', '$451', 'Category', 'Product', 'Nav',
-function ($routeParams, $sce, $scope, $451, Category, Product, Nav) {
+four51.app.controller('CategoryCtrl', ['$routeParams', '$sce', '$scope', '$451', 'Category', 'Product', 'Nav', '$location',
+function ($routeParams, $sce, $scope, $451, Category, Product, Nav, $location) {
 	$scope.productLoadingIndicator = true;
 	$scope.settings = {
 		currentPage: 1,
@@ -8,6 +8,35 @@ function ($routeParams, $sce, $scope, $451, Category, Product, Nav) {
 	$scope.trusted = function(d){
 		if(d) return $sce.trustAsHtml(d);
 	}
+	$scope.isInPath = function(path) {
+        var cur_path = $location.path().replace('/', '');
+        var result = false;
+
+        if(cur_path.indexOf(path) > -1) {
+            result = true;
+        }
+        else {
+            result = false;
+        }
+        return result;
+    };
+	$scope.subInPath = function(path) {
+        var cur_path = $location.path().replace('/', '');
+        var result = false;
+
+        angular.forEach(path,function(p){
+        	if(cur_path.indexOf(p) > -1) {
+	            result = true;
+	        }
+        });
+        
+        return result;
+    };
+    $scope.ShowSubCat = function(node){
+    	if(node.ShowCat){
+    		node.ShowSubCat = true;
+    	}
+    }
 
 	function _search() {
 		$scope.searchLoading = true;
@@ -42,6 +71,7 @@ function ($routeParams, $sce, $scope, $451, Category, Product, Nav) {
 		}
 	});
 
+
     // panel-nav
     $scope.navStatus = Nav.status;
     $scope.toggleNav = Nav.toggle;
@@ -52,4 +82,40 @@ function ($routeParams, $sce, $scope, $451, Category, Product, Nav) {
 			$scope.sorter = s.replace(' DESC', "");
 		$scope.direction = s.indexOf('DESC') > -1;
 	});
+	
+	
+	// SHOW BUCKETS
+	function buckets() {
+	    var homeurl = 'https://tricor.four51ordercloud.com/Test/catalog';
+        var myurl = window.location;
+	    
+	    if(homeurl == myurl) {
+	        document.getElementById("buckets").style.display = 'block';
+        }
+        else{
+        }
+	}
+	window.setTimeout(buckets, 300);
+	
+	
+	
+	function togglecat($scope) {
+
+	    $scope.visible = true;
+	    
+	    $scope.toggle = function() {
+	        $scope.visible = !scope.visible;
+	    };
+
+	}
+	
+	
+
+	
 }]);
+
+
+
+	
+
+    
