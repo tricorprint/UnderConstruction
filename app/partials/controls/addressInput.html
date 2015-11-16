@@ -96,9 +96,10 @@
             <span class="alert alert-warning" ng-show="objectExists">{{'An address with that name already exists. Please specify another name' | r | xlat}}</span><br />
             <button ng-if="(user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')) && address.IsCustEditable" class="btn btn-danger" ng-click="delete()" type="button">{{'Delete' | r | xlat}}</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">{{'Cancel' | r | xlat}}</button>
-            <button ng-if="(user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')) && address.IsCustEditable != false" class="btn btn-primary pull-right" type="submit" ng-disabled="addressEdit.$invalid" id="451_btn_user">
+            <button ng-if="(user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')) && address.IsCustEditable != false"
+                    class="btn btn-primary pull-right" type="submit">
                 <i ng-show="addressEdit.$invalid" class="fa fa-warning"></i>
-                {{'Save' | r | xlat}} {{address.AddressName}}
+                {{'Save' | r | xlat}}
             </button>
         </div>
     </form>

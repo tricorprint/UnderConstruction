@@ -17,28 +17,57 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Orde
 	$scope.checkOutSection = $scope.hasOrderConfig ? 'order' : 'shipping';
 
     function submitOrder() {
-	    $scope.displayLoadingIndicator = true;
-	    $scope.errorMessage = null;
-        Order.submit($scope.currentOrder,
-	        function(data) {
-				if ($scope.user.Company.GoogleAnalyticsCode) {
-					GoogleAnalytics.ecommerce(data, $scope.user);
+
+		$scope.showErrors = false;
+		// check to make sure the form is completely valid
+		if ($scope.cart_shipping.$valid && $scope.cart_billing.$valid) {
+
+			$scope.displayLoadingIndicator = true;
+			$scope.errorMessage = null;
+
+			Order.submit($scope.currentOrder,
+				function (data) {
+					if ($scope.user.Company.GoogleAnalyticsCode) {
+						GoogleAnalytics.ecommerce(data, $scope.user);
+					}
+					$scope.user.CurrentOrderID = null;
+					User.save($scope.user, function (data) {
+						$scope.user = data;
+						$scope.displayLoadingIndicator = false;
+					});
+					$scope.currentOrder = null;
+					$location.path('/order/' + data.ID);
+				},
+				function (ex) {
+					$scope.errorMessage = ex.Message;
+					$scope.displayLoadingIndicator = false;
+					$scope.shippingUpdatingIndicator = false;
+					$scope.shippingFetchIndicator = false;
 				}
-				$scope.user.CurrentOrderID = null;
-				User.save($scope.user, function(data) {
-			        $scope.user = data;
-	                $scope.displayLoadingIndicator = false;
-		        });
-		        $scope.currentOrder = null;
-		        $location.path('/order/' + data.ID);
-	        },
-	        function(ex) {
-		        $scope.errorMessage = ex.Message;
-		        $scope.displayLoadingIndicator = false;
-		        $scope.shippingUpdatingIndicator = false;
-		        $scope.shippingFetchIndicator = false;
-	        }
-        );
+			);
+		}
+		else {
+			/*TODO: check the customfield directive - required for cart_order not working right*/
+			if (!$scope.cart_order.$valid && !$scope.cart_shipping.$valid && !$scope.cart_billing.$valid) {
+				alert('Please complete the order, shipping, and billing sections.');
+			}
+			if (!$scope.cart_order.$valid && $scope.cart_shipping.$valid && !$scope.cart_billing.$valid) {
+				alert('Please complete the order and billing sections.');
+			}
+			if (!$scope.cart_order.$valid && !$scope.cart_shipping.$valid && $scope.cart_billing.$valid) {
+				alert('Please complete the order and shipping sections.');
+			}
+			if (!$scope.cart_shipping.$valid && !$scope.cart_billing.$valid) {
+				alert('Please complete the shipping and billing sections.');
+			}
+			if ($scope.cart_shipping.$valid && !$scope.cart_billing.$valid) {
+				$scope.showErrors = true;
+				alert('Please complete the billing section.');
+			}
+			if (!$scope.cart_shipping.$valid && $scope.cart_billing.$valid) {
+				alert('Please complete the shipping section.');
+			}
+		}
     };
 
 	$scope.$watch('currentOrder.CostCenter', function() {
