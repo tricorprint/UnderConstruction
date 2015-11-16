@@ -342,3 +342,64 @@ h2 .jumbotron  {color: #777777;}
 .panel-product-list .well  {color: #000000;}
 .panel-product-list .well  {border-color: #f0f0f0;}
 
+
+
+/*451 Misc*/
+.order-cloud .form-signin .btn-primary {
+    transition:none;
+}
+
+.alert-custom {
+    background-color: #890039;
+    border-color: #890039;
+    color: #fff;
+}
+
+/*451 Required Fields*/
+.btn i.fa-warning,
+.checkout i.fa-warning,
+.checkout i.fa-exclamation-circle {
+    display:none;
+}
+
+input.ng-invalid,
+textarea.ng-invalid,
+select.ng-invalid,
+input.ng-invalid:invalid,
+textarea.ng-invalid:invalid,
+select.ng-invalid:invalid {
+    border-color: #ddd;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.075) inset;
+}
+
+input.ng-invalid:focus,
+textarea.ng-invalid:focus,
+select.ng-invalid:focus,
+input.ng-invalid:invalid:focus,
+textarea.ng-invalid:invalid:focus,
+select.ng-invalid:invalid:focus,
+input.ng-invalid.ng-invalid:focus,
+textarea.ng-invalid.ng-invalid:focus,
+select.ng-invalid.ng-invalid:focus,
+input.ng-invalid:invalid.ng-invalid:focus,
+textarea.ng-invalid:invalid.ng-invalid:focus,
+select.ng-invalid:invalid.ng-invalid:focus,
+input.ng-invalid:invalid:focus,
+textarea.ng-invalid:invalid:focus,
+select.ng-invalid:invalid:focus,
+input.ng-invalid:invalid:invalid:focus,
+textarea.ng-invalid:invalid:invalid:focus,
+select.ng-invalid:invalid:invalid:focus {
+    border-color: #ddd;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.075) inset;
+}
+
+.form-control {
+    border-color: #ddd;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.075) inset;
+    transition: none;
+}
+
+.form-control:focus {
+    border-color: #ddd;
+}
