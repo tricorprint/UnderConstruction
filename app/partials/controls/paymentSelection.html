@@ -19,12 +19,12 @@
             <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'BudgetAccount' || currentOrder.BudgetAccountID }"></i>
             {{'Spending Account' | r | xlat}}
         </button>
-        <button class="btn btn-default" type="button"
+        <!--<button class="btn btn-default" type="button"
                 ng-if="user.AvailableCreditCards.length > 0 && user.Permissions.contains('PayByCreditCard')"
                 ng-click="currentOrder.PaymentMethod = 'CreditCard'">
             <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'CreditCard' }"></i>
             {{'Credit Card' | r | xlat}}
-        </button>
+        </button>-->
         <button class="btn btn-info pull-right" type="button"
                 ng-hide="(billaddressform || (!addressform && (addresses | filter:{IsBilling:true}).length == 0) || !user.Permissions.contains('CreateBillToAddress'))"
                 ng-click="billaddressform = true">
