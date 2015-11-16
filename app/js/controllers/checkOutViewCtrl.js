@@ -20,7 +20,7 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Orde
 
 		$scope.showErrors = false;
 		// check to make sure the form is completely valid
-		if ($scope.cart_shipping.$valid && $scope.cart_billing.$valid) {
+		if ($scope.cart_order.$valid && $scope.cart_shipping.$valid && $scope.cart_billing.$valid) {
 
 			$scope.displayLoadingIndicator = true;
 			$scope.errorMessage = null;
@@ -49,23 +49,32 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Orde
 		else {
 			/*TODO: check the customfield directive - required for cart_order not working right*/
 			if (!$scope.cart_order.$valid && !$scope.cart_shipping.$valid && !$scope.cart_billing.$valid) {
+				$scope.showErrors = true;
 				alert('Please complete the order, shipping, and billing sections.');
 			}
 			if (!$scope.cart_order.$valid && $scope.cart_shipping.$valid && !$scope.cart_billing.$valid) {
+				$scope.showErrors = true;
 				alert('Please complete the order and billing sections.');
 			}
 			if (!$scope.cart_order.$valid && !$scope.cart_shipping.$valid && $scope.cart_billing.$valid) {
+				$scope.showErrors = true;
 				alert('Please complete the order and shipping sections.');
 			}
-			if (!$scope.cart_shipping.$valid && !$scope.cart_billing.$valid) {
+			if ($scope.cart_order.$valid && !$scope.cart_shipping.$valid && !$scope.cart_billing.$valid) {
+				$scope.showErrors = true;
 				alert('Please complete the shipping and billing sections.');
 			}
-			if ($scope.cart_shipping.$valid && !$scope.cart_billing.$valid) {
+			if ($scope.cart_order.$valid && $scope.cart_shipping.$valid && !$scope.cart_billing.$valid) {
 				$scope.showErrors = true;
 				alert('Please complete the billing section.');
 			}
-			if (!$scope.cart_shipping.$valid && $scope.cart_billing.$valid) {
+			if ($scope.cart_order.$valid && !$scope.cart_shipping.$valid && $scope.cart_billing.$valid) {
+				$scope.showErrors = true;
 				alert('Please complete the shipping section.');
+			}
+			if (!$scope.cart_order.$valid && $scope.cart_shipping.$valid && $scope.cart_billing.$valid) {
+				$scope.showErrors = true;
+				alert('Please complete the order section.');
 			}
 		}
     };
