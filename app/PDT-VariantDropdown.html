@@ -69,7 +69,7 @@
         <!-- STATIC SPECS PANEL!
         <staticspecstable ng-show="StaticSpecGroups && user.Permissions.contains('ViewNonCustomizableSpecs')" specgroups="StaticSpecGroups" length="LineItem.Product.StaticSpecLength"/> -->
         <!-- ORDER PANEL! -->
-        <form name="addToOrderForm" novalidate="">
+        <form name="addToOrderForm" ng-submit="addToOrder()">
             <div class="panel panel-default">
                 <div class="panel-heading" ng-if="allowAddToOrder">
                     <h3 class="panel-title">
@@ -115,7 +115,7 @@
                                 <div>
                                     <div class="view-form-icon" ng-show="allowAddFromVariantList">
                                         <label>{{('Quantity' | r) | xlat}}</label>
-                                        <quantityfield required="false" calculated="calcVariantLineItems" lineitem="variantLineItems[selectedVariant.InteropID]" class="quantity" />
+                                        <quantityfield required="true" calculated="calcVariantLineItems" lineitem="variantLineItems[selectedVariant.InteropID]" class="quantity" />
                                     </div>
                                 </div>
                             </div>
@@ -140,13 +140,13 @@
                                 <quantityfield required="true" lineitem="LineItem" class="quantity" />
                             </div>
                         </div>
-                        <button class="btn btn-success btn-block btn-lg" type="button" id="451_btn_orderadd" ng-click="addToOrder()">
+                        <button class="btn btn-success btn-block btn-lg" type="submit" id="451_btn_orderadd">
                             <loadingindicator ng-show="addToOrderIndicator" />
-                            <!--<i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>-->
+                            <i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
                             {{addToOrderText | r | xlat}}
-                            <span id="451qa_lineitem_total" class="badge" ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">
+                            <!--<span id="451qa_lineitem_total" class="badge" ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">
                                 {{(LineItem.LineTotal || variantLineItemsOrderTotal) | culturecurrency}}
-                            </span>
+                            </span>-->
                         </button>
                     </div>
                 </div>
