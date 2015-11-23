@@ -7,10 +7,10 @@ four51.app.directive('quantityfield', ['$451', 'ProductDisplayService', function
         },
         restrict: 'E',
         template: '<div>'+
-            '<inlineerror ng-show="lineitem.qtyError" title="{{lineitem.qtyError}}" />'+
-            '<select id="451qa_input_qty" class="form-control" ng-change="qtyChanged(lineitem)" ng-if="lineitem.PriceSchedule.RestrictedQuantity" ng-required="required" ng-model="lineitem.Quantity" ng-options="pb.Quantity as getRestrictedQtyText(pb, lineitem.Product.QuantityMultiplier) for pb in lineitem.PriceSchedule.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"><option value=""></option></select>'+
-            '<input ng-disabled="lineitem.Variant.RecordCount > 0 && lineitem.ID" id="451qa_input_qty" placeholder="0" autocomplete="off" class="form-control" ng-change="qtyChanged(lineitem)" ng-if="!lineitem.PriceSchedule.RestrictedQuantity" type="text" ng-required="required" name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"/>'+
-            '</div>',
+        '<select id="451qa_input_qty" class="form-control" ng-change="qtyChanged(lineitem)" ng-if="lineitem.PriceSchedule.RestrictedQuantity" ng-required="required" ng-model="lineitem.Quantity" ng-options="pb.Quantity as getRestrictedQtyText(pb, lineitem.Product.QuantityMultiplier) for pb in lineitem.PriceSchedule.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"><option value=""></option></select>'+
+        '<input ng-disabled="lineitem.Variant.RecordCount > 0 && lineitem.ID" id="451qa_input_qty" placeholder="0" autocomplete="off" class="form-control" ng-change="qtyChanged(lineitem)" ng-if="!lineitem.PriceSchedule.RestrictedQuantity" type="text" ng-required="required" name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"/>'+
+        '</div>'+
+        '<div class="alert alert-danger" style="border-radius:0;" ng-show="lineitem.qtyError">{{lineitem.qtyError}}</div>',
         link: function(scope){
             scope.getRestrictedQtyText = function(priceBreak, qtyMultiplier){
                 var qtyText = priceBreak.Quantity * qtyMultiplier;
@@ -24,7 +24,7 @@ four51.app.directive('quantityfield', ['$451', 'ProductDisplayService', function
                     scope.calculated(lineitem);
             };
             scope.validQuantityAddToOrder = function(value, lineItem){
-				if (!value) return;
+                if (!value) return;
                 var variant = lineItem.Variant;
                 var product = lineItem.Product;
                 var priceSchedule = lineItem.PriceSchedule;
@@ -69,7 +69,7 @@ four51.app.directive('quantityfield', ['$451', 'ProductDisplayService', function
                     var qtyAvail = (product.IsVariantLevelInventory ? variant.QuantityAvailable : product.QuantityAvailable) + (lineItem.OriginalQuantity || 0);
 
                     if(qtyAvail < value && product.AllowExceedInventory == false && priceSchedule.OrderType != 'Replenishment'){
-                        scope.lineitem.qtyError = "cannot exceed the Quantity Available of " +  qtyAvail;
+                        scope.lineitem.qtyError = "Quantity cannot exceed the Quantity Available of " +  qtyAvail;
                         scope.valid = false;
                     }
                 }
