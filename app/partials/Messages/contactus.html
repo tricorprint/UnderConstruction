@@ -1,13 +1,73 @@
-<section class="accountpadding col-xs-12 col-sm-12 col-md-10 col-lg-10" style="float: none; margin-left:auto; margin-right: auto;">
-    <accountnavigation ng-show="user.Permissions.contains('ViewSelfAdmin') || user.Type == 'Customer'" />
-    <div class="panel panel-default"><!-- style="padding-top:15px"-->
-        <div class="panel-heading">
-            <h3 class="panel-title panel-primary">{{('Contact' | r) + ' ' + ('Us' | r) | xlat }}</h3>
-        </div>
-        <div class="panel-body">
-			<p></p>
-		</div>
-        <div class="panel-footer">
-        </div>
+<div class="row contact-request">
+    <div class="col-md-5 col-md-offset-1 col-xs-12 col-sm-12">
+        <form name="email_Send" ng-submit="sendEmail(EmailDetails)">
+            <div class="row">
+                <div class="view-form-icon">
+                    <div class="col-md-6">
+                        <label>Name</label>
+                        <input type="text" name="name" required class="form-control" tabindex="1" ng-model="EmailDetails.Name" />
+                        <i class="fa fa-user"></i>
+                    </div>
+                </div>
+                <div class="view-form-icon">
+                    <div class="col-md-6">
+                        <label>Email</label>
+                        <input type="email" name="email" required ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z0-9._]+\.[a-z.]{2,5}$/" class="form-control" tabindex="2" ng-model="EmailDetails.Email" />
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="view-form-icon">
+                    <div class="col-md-12">
+                        <label>Subject</label>
+                        <input type="text" name="subject" required class="form-control" tabindex="3" ng-model="EmailDetails.Subject" />
+                        <i class="fa fa-pencil-square-o"></i>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Comments or Questions</label>
+                    <textarea class="form-control" name="comments" required tabindex="4" ng-model="EmailDetails.CommentsQuestions"></textarea>
+                </div>
+            </div>
+            <br />
+            <!--<div class="row view-error-message" ng-show="showErrors">
+                <span class="error" ng-show="email_Send.name.$invalid">Please enter your name.<br /></span>
+                <span class="error" ng-show="email_Send.email.$invalid && !email_Send.email.$error.pattern">Please enter your email address.<br /></span>
+                <span class="error" ng-show="email_Send.email.$error.pattern">Please enter a valid email address.<br /></span>
+                <span class="error" ng-show="email_Send.subject.$invalid">Please enter a subject.<br /></span>
+                <span class="error" ng-show="email_Send.comments.$invalid">Please enter comments or questions.</span>
+            </div>-->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button class="btn" type="submit">Send Message</button>
+                </div>
+            </div>
+        </form>
     </div>
-</section>
+    <div class="col-md-5 col-xs-12 col-sm-12">
+        <div class="contact-info">
+        <p>
+            Have a question or comment? Have a suggestion for a new item? We'd love to hear from you. Fill out this contact form, send an email to <a href="mailto:shop@puppetlabs.com">shop@puppetlabs.com</a>
+            or give us a call.
+        </p>
+            <br />
+        <hr />
+            <br />
+        <ul>
+            <li>308 SW 2nd Ave, 5th Floor</li>
+            <li> Portland, OR 97204 </li>
+            <li>
+                <span class="fa fa-phone"></span>
+                877-575-9775
+            </li>
+            <li>
+                <span class="fa fa-envelope"></span>
+                <a href="mailto:shop@puppetlabs.com">shop@puppetlabs.com</a>
+            </li>
+        </ul>
+    </div>
+</div>
