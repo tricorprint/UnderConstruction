@@ -21,15 +21,15 @@ four51.app.directive('identifyusermessage', function() {
 //FORCED USERNAME PREFIX
 //
 
-four51.app.directive('testPrefix', function() {
+four51.app.directive('prefix', function() {
     return {
         restrict: 'A',
         require: 'ngModel',
         link: function(scope, element, attrs, controller) {
-            function ensureTestPrefix(value) {
+            function ensurePrefix(value) {
                     return 'tricor' + value;
                 }
-            controller.$parsers.push(ensureTestPrefix);
+            controller.$parsers.push(ensurePrefix);
         }
     };
 });

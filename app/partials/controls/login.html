@@ -15,7 +15,7 @@
                                 <div class="view-form-icon" ng-show="!showEmailHelp && !PasswordReset">
                                     <div>
                                         <label ng-show="credentials.Username">{{'Username' | r}}</label>
-                                        <input autofocus class="form-control" type="text" ng-model="credentials.Username" placeholder="{{'Username' | r}}" />
+                                        <input autofocus class="form-control" type="text" ng-model="credentials.Username" placeholder="{{'Username' | r}}" prefix />
                                         <i class="fa fa-user"></i>
                                     </div>
                                     <div ng-show="!PasswordSecurityException">
@@ -129,7 +129,7 @@
                     <div class="view-form-icon">
                         <div>
                             <label>Username</label>
-                            <input type="text" name="username" class="form-control" ng-model="profileInfo.Username" ng-required="true" test-prefix />
+                            <input type="text" name="username" class="form-control" ng-model="profileInfo.Username" ng-required="true" prefix />
                         </div>
                         <i class="fa fa-user"></i>
                     </div>
