@@ -12,7 +12,7 @@
                 <div class="view-form-icon">
                     <div class="col-md-6">
                         <label>Email</label>
-                        <input type="email" name="email" style="color:#555555" required ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z0-9._]+\.[a-z.]{2,5}$/" class="form-control" tabindex="2" ng-model="EmailDetails.Email" />
+                        <input type="email" name="email" required ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z0-9._]+\.[a-z.]{2,5}$/" class="form-control" tabindex="2" ng-model="EmailDetails.Email" />
                         <i class="fa fa-envelope"></i>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <label>Comments or Questions</label>
-                    <textarea class="form-control" name="comments" style="min-height:100px" required tabindex="4" ng-model="EmailDetails.CommentsQuestions"></textarea>
+                    <textarea class="form-control" name="comments" required tabindex="4" ng-model="EmailDetails.CommentsQuestions"></textarea>
                 </div>
             </div>
             <br />
@@ -40,10 +40,11 @@
                 <span class="error" ng-show="email_Send.email.$error.pattern">Please enter a valid email address.<br /></span>
                 <span class="error" ng-show="email_Send.subject.$invalid">Please enter a subject.<br /></span>
                 <span class="error" ng-show="email_Send.comments.$invalid">Please enter comments or questions.</span>
+
             </div>-->
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <button class="btn btn-success" type="submit">Send Message</button>
+                    <button class="btn" type="submit">Send Message</button>
                 </div>
             </div>
         </form>
